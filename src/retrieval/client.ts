@@ -89,7 +89,7 @@ function buildWslPythonCommand(toolName: string, payload: Record<string, unknown
 
   const entry = toolMap[toolName];
   if (!entry) {
-    throw new Error(`Unsupported jCodeMunch tool: ${toolName}`);
+    throw new Error(`Unsupported retrieval tool: ${toolName}`);
   }
 
   const payloadB64 = Buffer.from(JSON.stringify(payload), "utf8").toString("base64");
