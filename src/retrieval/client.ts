@@ -93,9 +93,10 @@ function buildWslPythonCommand(toolName: string, payload: Record<string, unknown
   }
 
   const payloadB64 = Buffer.from(JSON.stringify(payload), "utf8").toString("base64");
+  const setupCommand = process.env.JCODEMUNCH_WSL_SETUP?.trim();
 
   return [
-    "source ${JCODEMUNCH_WSL_SETUP}",
+    ...(setupCommand ? [setupCommand] : []),
     `python -c 'import base64, json; from ${entry.module} import ${entry.func}; payload = json.loads(base64.b64decode("${payloadB64}").decode("utf-8")); print(json.dumps(${entry.func}(**payload)))'`,
   ].join(" && ");
 }
