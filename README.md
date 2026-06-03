@@ -25,8 +25,8 @@ At each execution step, threadzero runs this loop:
 GSD state → retrieval → pack → execute → checkpoint → benchmark
 ```
 
-1. Read the current task or derive it from GSD `.planning/` state
-2. Retrieve focused code context through jCodeMunch
+1. Read the current task or derive it from workflow state
+2. Retrieve focused code context through the retrieval MCP layer
 3. Build a compact execution prompt (only what this step needs)
 4. Run Claude Code or Codex on that prompt
 5. Save the execution run
@@ -46,18 +46,18 @@ GSD state → retrieval → pack → execute → checkpoint → benchmark
 
 - **Task storage** — persistent task definitions
 - **Checkpoint storage** — compact run state per step
-- **Retrieval bundles** — jCodeMunch context snapshots, not full file reads
+- **Retrieval bundles** — compact context snapshots, not full file reads
 - **Compact context packing** — assembles only the symbols and context needed for the current task
 - **Continuation** — resume from any checkpoint without re-explaining the full codebase
 - **Benchmark capture** — compare runs against a baseline; track whether changes improve or degrade performance
-- **GSD integration** — reads task state from `.planning/` workflow artifacts
+- **GSD integration** — reads task state from workflow artifacts
 
 ---
 
 ## Stack
 
 - TypeScript
-- jCodeMunch (retrieval)
+- retrieval MCP
 - Claude Code / Codex CLI
 - Local JSON-based state storage
 
@@ -69,7 +69,7 @@ GSD state → retrieval → pack → execute → checkpoint → benchmark
 // threadzero.config.json
 {
   "agent": "claude-code",
-  "retrieval": "jcodemunch",
+  "retrieval": "retrieval-mcp",
   "checkpointDir": ".threadzero/checkpoints",
   "benchmarkDir": ".threadzero/benchmarks"
 }
@@ -103,7 +103,7 @@ npx threadzero benchmark report
 ```
 src/
   runner/       Agent execution (Claude Code, Codex)
-  retrieval/    jCodeMunch integration + bundle building
+  retrieval/    retrieval MCP integration + bundle building
   packing/      Context packing — symbol selection, prompt assembly
   storage/      Task, checkpoint, retrieval bundle storage
   benchmark/    Benchmark case storage + comparison reporting

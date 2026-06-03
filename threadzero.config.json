@@ -7,7 +7,7 @@
     "path": ".threadzero/threadzero.db"
   },
   "retrieval": {
-    "provider": "jcodemunch-mcp",
+    "provider": "retrieval-mcp",
     "enabled": true
   },
   "context": {

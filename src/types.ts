@@ -21,7 +21,7 @@ export interface ThreadzeroConfig {
     path: string;
   };
   retrieval: {
-    provider: "jcodemunch-mcp";
+    provider: "retrieval-mcp";
     enabled: boolean;
   };
   context: {

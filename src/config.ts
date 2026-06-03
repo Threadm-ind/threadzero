@@ -11,7 +11,7 @@ const DEFAULT_CONFIG: ThreadzeroConfig = {
     path: ".threadzero/threadzero.db",
   },
   retrieval: {
-    provider: "jcodemunch-mcp",
+    provider: "retrieval-mcp",
     enabled: false,
   },
   context: {
