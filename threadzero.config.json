@@ -1,0 +1,44 @@
+{
+  "project_name": "threadzero",
+  "primary_executor": "claude-code",
+  "secondary_executor": "codex",
+  "storage": {
+    "type": "sqlite",
+    "path": ".threadzero/threadzero.db"
+  },
+  "retrieval": {
+    "provider": "jcodemunch-mcp",
+    "enabled": true
+  },
+  "context": {
+    "default_budget_tokens": 12000,
+    "checkpoint_summary_budget_tokens": 1200
+  },
+  "benchmarks": {
+    "enabled": true
+  },
+  "workflow": {
+    "enabled": true,
+    "default_repo": "threadzero",
+    "derive_goal_from_gsd_state": true,
+    "auto_checkpoint": true,
+    "auto_benchmark": true,
+    "fallback_to_secondary": true,
+    "auto_index_repo": true
+  },
+  "routing": {
+    "enabled": true,
+    "default_effort": "medium",
+    "enable_history_bias": true,
+    "rules": {
+      "docs": { "executor": "codex", "effort": "low" },
+      "simple_edit": { "executor": "codex", "effort": "medium" },
+      "verification": { "executor": "codex", "effort": "medium" },
+      "planning": { "executor": "claude-code", "effort": "high" },
+      "debugging": { "executor": "claude-code", "effort": "high" },
+      "feature": { "executor": "claude-code", "effort": "high" },
+      "refactor": { "executor": "codex", "effort": "xhigh" },
+      "unknown": { "executor": "claude-code", "effort": "medium" }
+    }
+  }
+}

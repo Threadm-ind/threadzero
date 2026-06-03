@@ -1,0 +1,20 @@
+{
+  "project_name": "threadzero",
+  "primary_executor": "claude-code",
+  "secondary_executor": "codex",
+  "storage": {
+    "type": "sqlite",
+    "path": ".threadzero/threadzero.db"
+  },
+  "retrieval": {
+    "provider": "jcodemunch-mcp",
+    "enabled": false
+  },
+  "context": {
+    "default_budget_tokens": 12000,
+    "checkpoint_summary_budget_tokens": 1200
+  },
+  "benchmarks": {
+    "enabled": false
+  }
+}
